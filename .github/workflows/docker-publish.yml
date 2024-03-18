@@ -98,6 +98,7 @@
 
 ---
 
+
 name: CI
 
 on:
@@ -116,7 +117,7 @@ jobs:
         id: generate_vars
         run: |
           # Just Tag
-          IMAGE_TAG=latest
+          IMAGE_TAG=pr-${{ github.event.pull_request.number }}-$(echo ${{ github.event.pull_request.head.sha }} | cut -c1-8)
           # Just Image name
           IMAGE_NAME=${{ github.repository }}
           #Image ID= Name + Tag
@@ -147,4 +148,4 @@ jobs:
           context: .
           pull: true
           push: true
-          tags: ${{ github.repository}}/test-ci:latest
+          tags: ${{ steps.generate_vars.outputs.image }}
