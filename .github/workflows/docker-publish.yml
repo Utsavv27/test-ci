@@ -83,7 +83,7 @@ jobs:
         #   cache-to: type=gha,mode=max
         with:
           context: .
-          file: ./dockerfile
+          file: ./Dockerfile
           pull: true
           push: true
           tags: ${{ steps.meta.outputs.tags }}
