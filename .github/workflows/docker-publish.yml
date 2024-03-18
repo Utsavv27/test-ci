@@ -167,11 +167,25 @@ jobs:
         echo "Image from Output: ${{ steps.generate_vars.outputs.image }}"
         echo "Repo from Output: ${{ steps.generate_vars.outputs.image_name }}"
 
-    - name: Build and Push Docker Image
-      uses: docker/build-push-action@v5.0.0
+    # - name: Build and Push Docker Image
+    #   uses: docker/build-push-action@v5.0.0
+    #   with:
+    #     context: .
+    #     file: ./dockerfile
+    #     pull: true
+    #     push: true
+    #     tags: ${{ steps.generate_vars.outputs.image }}
+    # - name: build
+    #   run: docker build . -t myimg:1.0 
+  
+    # - name: Push
+    #   run: docker tag 
+    - name: Build and push Docker image
+      id: docker_build
+      uses: docker/build-push-action@v2
       with:
         context: .
-        file: ./dockerfile
+        file: dockerfile
         pull: true
         push: true
         tags: ${{ steps.generate_vars.outputs.image }}
