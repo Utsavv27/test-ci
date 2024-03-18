@@ -96,8 +96,6 @@ jobs:
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
 
 
----
-
 
 # name: CI
 
