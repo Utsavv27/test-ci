@@ -117,7 +117,7 @@ jobs:
         id: generate_vars
         run: |
           # Just Tag
-          IMAGE_TAG=${{ steps.meta.outputs.tags }}
+          IMAGE_TAG=latest
           # Just Image name
           IMAGE_NAME=${{ github.repository }}
           #Image ID= Name + Tag
