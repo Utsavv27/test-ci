@@ -147,4 +147,4 @@ jobs:
           context: .
           pull: true
           push: true
-          tags: ${{ github.repository_owner }}/test-ci:latest
+          tags: ${{ github.repository}}/test-ci:latest
