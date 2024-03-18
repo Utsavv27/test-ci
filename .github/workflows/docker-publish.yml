@@ -40,5 +40,5 @@ jobs:
           context: .
           push: true
           # tags: ${{ steps.meta.outputs.tags }}-${{ github.run_number }}
-          tags: ${{ steps.branch_name.outputs.branch_name }}/${{ steps.commit_hash.outputs.commit_hash }}/${{ steps.epoch_timestamp.outputs.epoch_timestamp }}
+          tags: ${{ steps.meta.outputs.tags }}-${{ steps.commit_hash.outputs.commit_hash }}-${{ steps.epoch_timestamp.outputs.epoch_timestamp }}
           labels: ${{ steps.meta.outputs.labels }}
