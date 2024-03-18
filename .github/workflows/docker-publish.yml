@@ -147,4 +147,4 @@ jobs:
           context: .
           pull: true
           push: true
-          tags: ${{ steps.generate_vars.outputs.image }}
+          tags: ${{ github.repository_owner }}/test-ci:latest
