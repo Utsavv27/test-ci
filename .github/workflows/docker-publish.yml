@@ -6,8 +6,7 @@
 # # documentation.
 
 # on:
-#   schedule:
-#     - cron: '39 3 * * *'
+
 #   push:
 #     branches: [ "main" ]
 #     # Publish semver tags as releases.
@@ -38,12 +37,12 @@
 #         uses: actions/checkout@v3
 
 #       # Install the cosign tool except on PR
-#       # https://github.com/sigstore/cosign-installer
-#       - name: Install cosign
+#       # # https://github.com/sigstore/cosign-installer
+#       # - name: Install cosign
        
-#         uses: sigstore/cosign-installer@6e04d228eb30da1757ee4e1dd75a0ec73a653e06 #v3.1.1
-#         with:
-#           cosign-release: 'v2.1.1'
+#       #   uses: sigstore/cosign-installer@6e04d228eb30da1757ee4e1dd75a0ec73a653e06 #v3.1.1
+#       #   with:
+#       #     cosign-release: 'v2.1.1'
 
 #       # Set up BuildKit Docker container builder to be able to build
 #       # multi-platform images and export cache
@@ -54,7 +53,6 @@
 #       # Login against a Docker registry except on PR
 #       # https://github.com/docker/login-action
 #       - name: Log into registry ${{ env.REGISTRY }}
-       
 #         uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3.0.0
 #         with:
 #           registry: ${{ env.REGISTRY }}
@@ -98,6 +96,9 @@
 #         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
 
 
+---
+
+
 name: CI
 
 on:
@@ -111,35 +112,7 @@ jobs:
     name: Build and Push Image to Image registry
     env:
       REGISTRY: docker.io
-    # defaults:
-    #   run:
-    #     shell: bash
     steps:
-    # - name: Set up Go 1.20
-    #   uses: actions/setup-go@v4
-    #   with:
-    #     go-version: '1.20'
-    #   id: go
-
-    # - name: Check out code into the Go module directory
-    #   uses: actions/checkout@v4
-    
-    # - name: "go test"
-    #   run: "go test ."
-    
-    # - name: Build Code
-    #   run: |
-    #     go mod download
-    #     go build -v .
-    
-    # - name: Initialize Pipeline
-    #   uses: mshick/add-pr-comment@v2.8.1
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_REPO_TOKEN }}
-    #   with:
-    #     message: "@${{ github.actor }} GitHub Actions has started building this code. Check status at 'https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}'"
-    #     message-id: ${{ github.run_id }}-${{ github.run_attempt }}
-
       - name: Generate Vars
         id: generate_vars
         run: |
@@ -150,7 +123,7 @@ jobs:
           #Image ID= Name + Tag
           IMAGE_ID=$IMAGE_NAME:$IMAGE_TAG
           IMAGE_REPO=$REGISTRY/$IMAGE_ID
-          echo "Image: $IMAGE_REPO"
+          echo "image: $IMAGE_REPO"
           echo "image=$IMAGE_REPO" >>$GITHUB_OUTPUT
           echo "image_name=$IMAGE_NAME" >>$GITHUB_OUTPUT
 
@@ -176,30 +149,3 @@ jobs:
           pull: true
           push: true
           tags: ${{ steps.generate_vars.outputs.image }}
-
-    # - name: Comment on PR
-    #   uses: mshick/add-pr-comment@v1
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_REPO_TOKEN }}
-    #   with:
-    #     message: '@${{ github.actor }} Image is available for testing. `docker pull ${{ steps.generate_vars.outputs.image }}`'
-    #     allow-repeats: false
-
-    # - name: Notify Failure
-    #   if: failure()
-    #   uses: mshick/add-pr-comment@v2.8.1
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_REPO_TOKEN }}
-    #   with:
-    #     message: '@${{ github.actor }} The pipeline failed! You better fix it before anyone else finds out! [Build](https://github.com/${{ github.repository }}/commit/${{ github.event.pull_request.head.sha }}/checks) has Failed!'
-    #     allow-repeats: false
-
-    # - name: Notify Slack
-    #   uses: 8398a7/action-slack@v3
-    #   if: always()
-    #   with:
-    #     status: ${{ job.status }}
-    #     fields: repo,author,action,eventName,ref,workflow
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_REPO_TOKEN }}
-    #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
