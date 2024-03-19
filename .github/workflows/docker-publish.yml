@@ -40,7 +40,7 @@ jobs:
 
       # Lint Dockerfile
       - name: Lint Dockerfile
-        run: hadolint Dockerfile
+        run: hadolint utsav0077/${{ github.event.repository.name }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5.0.0
