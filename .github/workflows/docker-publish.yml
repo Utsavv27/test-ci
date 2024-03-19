@@ -12,10 +12,6 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v3
 
-      # Add hadolint step here
-      - name: Lint Dockerfile
-        run: docker run --rm -i hadolint/hadolint < Dockerfile
-
       - name: Log in to Docker Hub
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
         with:
@@ -35,6 +31,16 @@ jobs:
       - name: Generate Image Tag from Epoch
         id: generate
         run: echo "::set-output name=tag::$(date +%s)"
+
+      # Install hadolint
+      - name: Install hadolint
+        run: |
+          wget -O /usr/bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linux-x86_64
+          chmod +x /usr/bin/hadolint
+
+      # Lint Dockerfile
+      - name: Lint Dockerfile
+        run: hadolint Dockerfile
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5.0.0
