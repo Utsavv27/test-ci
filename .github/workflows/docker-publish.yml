@@ -38,10 +38,6 @@ jobs:
           sudo wget -O /usr/bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linux-x86_64
           sudo chmod +x /usr/bin/hadolint
 
-      # Lint Dockerfile
-      - name: Lint Dockerfile
-        run: hadolint utsav0077/${{ github.event.repository.name }}
-
       - name: Build and push Docker image
         uses: docker/build-push-action@v5.0.0
         with:
@@ -49,6 +45,10 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}-${{ steps.generate_tag.outputs.tag }}-${{ steps.generate.outputs.tag }}
           labels: ${{ steps.meta.outputs.labels }}
+        
+       # Lint Dockerfile
+      - name: Lint Dockerfile
+        run: hadolint docker://utsav0077:${{ steps.meta.outputs.tags }}-${{ steps.generate_tag.outputs.tag }}-${{ steps.generate.outputs.tag }}
 
 
 # name: Publish Docker image
