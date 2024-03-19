@@ -46,9 +46,9 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}-${{ steps.generate_tag.outputs.tag }}-${{ steps.generate.outputs.tag }}
           labels: ${{ steps.meta.outputs.labels }}
         
-       # Lint Dockerfile
+       # Lint Dockerfile  
       - name: Lint Dockerfile
-        run: hadolint docker://utsav0077:${{ steps.meta.outputs.tags }}-${{ steps.generate_tag.outputs.tag }}-${{ steps.generate.outputs.tag }}
+        run: hadolint dockerfile
 
 
 # name: Publish Docker image
