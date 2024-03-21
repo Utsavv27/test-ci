@@ -34,9 +34,11 @@ jobs:
 
       # Install hadolint
       - name: Install hadolint
-        run: |
-          sudo wget -O /usr/bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linux-x86_64
-          sudo chmod +x /usr/bin/hadolint
+        run: podman run --rm -i docker.io/hadolint/hadolint < dockerfile
+
+        # run: |
+        #   sudo wget -O /usr/bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linux-x86_64
+        #   sudo chmod +x /usr/bin/hadolint
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5.0.0
