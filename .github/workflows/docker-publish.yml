@@ -33,8 +33,8 @@ jobs:
         run: echo "::set-output name=tag::$(date +%s)"
 
       # Install hadolint
-      - name: Install hadolint
-        run: podman run --rm -i docker.io/hadolint/hadolint < dockerfile
+      - name: Install hadolint 
+        run: docker run --rm -i docker.io/hadolint/hadolint < dockerfile
 
         # run: |
         #   sudo wget -O /usr/bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linux-x86_64
