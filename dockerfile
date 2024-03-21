@@ -36,7 +36,7 @@ RUN php artisan clear-compiled
 
 RUN php artisan session:table
 
-CMD ["sh",  "-c", " php artisan migrate && php artisan serve  "]
+# CMD ["sh",  "-c", " php artisan migrate && php artisan serve  "]
 
 
 
