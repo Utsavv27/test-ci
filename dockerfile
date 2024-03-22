@@ -22,21 +22,9 @@ WORKDIR /app
 
 RUN composer install
 
-#RUN docker-php-ext-install exif
+RUN php artisan key:generate && php artisan config:clear && php artisan cache:clear && composer dump-autoload && php artisan clear-compiled  && php artisan session:table
 
-RUN php artisan key:generate
-
-RUN php artisan config:clear
-
-RUN php artisan cache:clear
-
-RUN composer dump-autoload
-
-RUN php artisan clear-compiled  
-
-RUN php artisan session:table
-
-# CMD ["sh",  "-c", " php artisan migrate && php artisan serve  "]
+CMD ["sh",  "-c", " php artisan migrate && php artisan serve  "]
 
 
 
