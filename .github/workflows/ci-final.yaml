@@ -35,8 +35,10 @@ jobs:
       # - name: Copy .env
       #   run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
-     
-      # Install hadolint 
+      - name: install curl
+        run: sudo apt install curl
+   
+         # Install hadolint 
       - name: Install dockfmt 
         run: export DOCKFMT_SHA256="f6bc025739cf4f56287e879c75c11cc73ebafdf93a57c9bcd8805d1ab82434a0"
             |
