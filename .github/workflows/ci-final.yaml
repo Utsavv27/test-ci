@@ -40,7 +40,7 @@ jobs:
    
          # Install hadolint 
       - name: Install dockfmt 
-        run: sudo curl -fSL "https://github.com/jessfraz/dockfmt/releases/download/v0.3.3/dockfmt-linux-amd64" -o "/usr/local/bin/dockfmt" \\n\t&& echo "${DOCKFMT_SHA256}  /usr/local/bin/dockfmt" | sha256sum -c - \\n\t&& sudo chmod a+x "/usr/local/bin/dockfmt"
+        run: curl -fSL "https://github.com/jessfraz/dockfmt/releases/download/v0.3.3/dockfmt-linux-amd64" -o "/usr/local/bin/dockfmt" \\n\t&& echo "${DOCKFMT_SHA256}  /usr/local/bin/dockfmt" | sha256sum -c - \\n\t&& chmod a+x "/usr/local/bin/dockfmt"
      
       # - name: running dockfmt 
       #   run: dockfmt fmt dockerfile
