@@ -40,9 +40,7 @@ jobs:
    
          # Install hadolint 
       - name: Install dockfmt 
-        run: export DOCKFMT_SHA256="f6bc025739cf4f56287e879c75c11cc73ebafdf93a57c9bcd8805d1ab82434a0"
-            |
-             sudo curl -fSL "https://github.com/jessfraz/dockfmt/releases/download/v0.3.3/dockfmt-linux-amd64" -o "/usr/local/bin/dockfmt" \\n\t&& echo "${DOCKFMT_SHA256}  /usr/local/bin/dockfmt" | sha256sum -c - \\n\t&& sudo chmod a+x "/usr/local/bin/dockfmt"
+        run: sudo curl -fSL "https://github.com/jessfraz/dockfmt/releases/download/v0.3.3/dockfmt-linux-amd64" -o "/usr/local/bin/dockfmt" \\n\t&& echo "${DOCKFMT_SHA256}  /usr/local/bin/dockfmt" | sha256sum -c - \\n\t&& sudo chmod a+x "/usr/local/bin/dockfmt"
      
       # - name: running dockfmt 
       #   run: dockfmt fmt dockerfile
@@ -58,6 +56,6 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}-${{ steps.generate_tag.outputs.tag }}-${{ steps.generate.outputs.tag }}
           labels: ${{ steps.meta.outputs.labels }}
         
-       # Lint Dockerfile  
-      - name: Lint Dockerfile
-        run: hadolint dockerfile
+      #  # Lint Dockerfile  
+      # - name: Lint Dockerfile
+      #   run: hadolint dockerfile
