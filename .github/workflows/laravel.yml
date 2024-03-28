@@ -19,7 +19,9 @@ jobs:
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Install Dependencies
-      run: composer install && composer update
+      run: | 
+        curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+        install composer
     - name: Generate key
       run: php artisan key:generate
     - name: Directory Permissions
