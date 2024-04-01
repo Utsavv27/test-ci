@@ -13,7 +13,7 @@ COPY . ./app/
 
 COPY .env.example .env
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN curl -sS https://getcomposer.org/installer | php --install-dir=/usr/local/bin --filename=composer
 
 RUN curl -sSL https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions -o - | sh -s \
       gd xdebug
@@ -24,7 +24,7 @@ RUN composer install
 
 RUN php artisan key:generate && php artisan config:clear && php artisan cache:clear && composer dump-autoload && php artisan clear-compiled  && php artisan session:table
 
-CMD ["sh",  "-c", " php artisan migrate --seed && php artisan serve --host=0.0.0.0 --port=8000 "]
+CMD ["sh",  "-c", " php artisan migrate && php artisan serve --host=0.0.0.0 --port=8000 "]
 
 
 
